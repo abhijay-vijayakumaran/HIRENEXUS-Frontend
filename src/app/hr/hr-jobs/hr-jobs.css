@@ -1,0 +1,15 @@
+.job-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-4px);
+}
+
+.job-info {
+  font-size: 14px;
+}
+
+.job-info strong {
+  color: #495057;
+}

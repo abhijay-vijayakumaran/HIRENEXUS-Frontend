@@ -1,0 +1,288 @@
+<div class="applications-page">
+
+  <div class="page-header rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-800 px-6 py-6 text-white shadow-lg">
+
+    <div class="flex items-center gap-4">
+
+      <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white ring-1 ring-white/25">
+
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+
+      </div>
+
+      <div>
+
+        <h2 class="mb-0 text-2xl font-bold">My Applications</h2>
+
+        <p class="mb-0 mt-1 text-sm text-blue-100">
+          Track the jobs you have applied for.
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="search-section relative w-full max-w-md">
+
+      <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-blue-400">
+
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+
+      </span>
+
+      <input
+        type="text"
+        class="w-full rounded-lg border border-white/30 bg-white/15 py-2 pl-10 pr-3 text-sm text-white outline-none backdrop-blur transition placeholder:text-blue-100 focus:border-white focus:bg-white/25"
+        placeholder="Search applications..."
+        [(ngModel)]="searchTerm"
+        (input)="searchApplications()"
+      >
+
+    </div>
+
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="inline-block h-10 w-10 animate-spin rounded-full border-4 border-blue-600 border-t-transparent"></div>
+    <p>Loading applications...</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="!loading && errorMessage" class="mb-5 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+    {{ errorMessage }}
+  </div>
+
+  <!-- No Applications -->
+  <div *ngIf="!loading && !errorMessage && filteredApplications.length === 0" class="empty-state rounded-2xl border-gray-200">
+
+    <div class="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+
+      <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+
+    </div>
+
+    <h4>No Applications Yet</h4>
+    <p>
+      You haven't applied for any jobs yet.
+    </p>
+  </div>
+
+  <!-- Applications -->
+  <div *ngIf="!loading && !errorMessage && applications.length > 0" class="applications-list">
+
+    <div *ngFor="let application of filteredApplications" class="application-card rounded-2xl border-gray-200 shadow-sm hover:shadow-lg hover:border-blue-200">
+
+      <!-- Header -->
+      <div class="application-header">
+
+        <div class="flex items-center gap-3">
+
+          <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-500/30">
+
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+
+          </div>
+
+          <div>
+
+            <h4>
+              {{ application.job?.title }}
+            </h4>
+
+            <p>
+              {{ application.job?.department }}
+            </p>
+
+          </div>
+
+        </div>
+
+        <span class="status-badge" [ngClass]="application.status">
+          {{ formatStatus(application.status) }}
+        </span>
+
+      </div>
+
+      <!-- Job Information -->
+      <div class="application-info">
+
+        <div class="info-item">
+          <strong>Location</strong>
+          <span class="inline-flex items-center gap-1.5 text-blue-700">
+
+            <svg class="h-4 w-4 shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+
+            {{ application.job?.location }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <strong>Employment Type</strong>
+          <span class="inline-flex items-center gap-1.5 text-blue-700">
+
+            <svg class="h-4 w-4 shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+
+            {{ application.job?.employmentType }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <strong>Salary</strong>
+          <span class="inline-flex items-center gap-1.5 text-blue-700">
+
+            <svg class="h-4 w-4 shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
+            ₹{{ application.job?.salary | number }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <strong>Applied On</strong>
+          <span class="inline-flex items-center gap-1.5 text-blue-700">
+
+            <svg class="h-4 w-4 shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+
+            {{ application.appliedAt | date:'mediumDate' }}
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Application Progress -->
+      <div class="application-progress">
+
+        <div class="progress-title">
+          Application Progress
+        </div>
+
+        <div class="progress-steps">
+
+          <div class="progress-step" [class.completed]="getStatusStep(application.status) >= 0">
+            <div class="step-circle">1</div>
+            <span>Applied</span>
+          </div>
+
+          <div class="progress-line" [class.completed]="getStatusStep(application.status) >= 1"></div>
+
+          <div class="progress-step" [class.completed]="getStatusStep(application.status) >= 1">
+            <div class="step-circle">2</div>
+            <span>Under Review</span>
+          </div>
+
+          <div class="progress-line" [class.completed]="getStatusStep(application.status) >= 2"></div>
+
+          <div class="progress-step" [class.completed]="getStatusStep(application.status) >= 2">
+            <div class="step-circle">3</div>
+            <span>Shortlisted</span>
+          </div>
+
+          <div class="progress-line" [class.completed]="getStatusStep(application.status) >= 3"></div>
+
+          <div class="progress-step" [class.completed]="getStatusStep(application.status) >= 3">
+            <div class="step-circle">4</div>
+            <span>Interview</span>
+          </div>
+
+          <div class="progress-line" [class.completed]="getStatusStep(application.status) >= 4"></div>
+
+          <div class="progress-step" [class.completed]="getStatusStep(application.status) >= 4">
+            <div class="step-circle">5</div>
+            <span>Selected</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Application Details Toggle -->
+
+      <button type="button" class="details-button" (click)="toggleApplication(application._id)">
+        {{ expandedApplication === application._id
+        ? 'Hide Details'
+        : 'View Application Details' }}
+      </button>
+
+      <button *ngIf="
+    application.status !== 'SELECTED' &&
+    application.status !== 'REJECTED' &&
+    application.status !== 'SHORTLISTED' &&
+    application.status !== 'INTERVIEW' &&
+    application.status !== 'WITHDRAWN'
+  " type="button" class="withdraw-button"   (click)="withdrawApplication(application._id)">
+        Withdraw Application
+      </button>
+
+      <!-- Application Details -->
+
+      <div *ngIf="expandedApplication === application._id" class="application-details">
+
+        <!-- Resume -->
+
+        <div class="detail-item">
+
+          <strong>Resume</strong>
+
+          <a [href]="resumeUrl(application.resume)" target="_blank"
+            rel="noopener noreferrer">
+            View Resume
+          </a>
+
+        </div>
+
+        <!-- Cover Letter -->
+
+        <div class="detail-item">
+
+          <strong>Cover Letter</strong>
+
+          <p>
+            {{ application.coverLetter || 'No cover letter provided' }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Toast -->
+  <div *ngIf="toastMessage" class="fixed right-5 top-5 z-[100] flex w-80 max-w-[90vw] items-start gap-3 rounded-xl p-4 shadow-2xl ring-1"
+    [class.bg-red-50]="toastType === 'error'"
+    [class.ring-red-200]="toastType === 'error'"
+    [class.text-red-800]="toastType === 'error'"
+    [class.bg-green-50]="toastType === 'success'"
+    [class.ring-green-200]="toastType === 'success'"
+    [class.text-green-800]="toastType === 'success'"
+    role="status" aria-live="polite">
+
+    <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full"
+      [class.bg-red-500]="toastType === 'error'"
+      [class.bg-green-500]="toastType === 'success'"></span>
+
+    <span class="flex-1 text-sm font-medium leading-snug">{{ toastMessage }}</span>
+
+    <button type="button" (click)="closeToast()" aria-label="Dismiss notification" class="shrink-0 rounded-md px-1.5 text-lg leading-none transition hover:bg-black/5">×</button>
+
+  </div>
+
+</div>

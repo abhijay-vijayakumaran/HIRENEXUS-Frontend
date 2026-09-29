@@ -1,0 +1,135 @@
+<!-- <p>login works!</p> -->
+<div class="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 via-white to-indigo-100 p-4">
+
+  <div class="w-full max-w-md">
+
+    <div class="w-full">
+
+      <div class="rounded-2xl bg-white p-1 shadow-xl ring-1 ring-gray-100">
+
+        <div class="p-6 sm:p-8">
+
+          <h2 class="mb-6 text-center text-2xl font-bold text-gray-900">
+            Login
+          </h2>
+
+          <form
+            [formGroup]="loginForm"
+            (ngSubmit)="login()"
+          >
+
+            <!-- Email -->
+
+            <div class="mb-4">
+
+              <label class="mb-1.5 block text-sm font-medium text-gray-700">
+                Email
+              </label>
+
+              <input
+                type="email"
+                class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                formControlName="email"
+                placeholder="Enter email"
+              >
+
+              <div
+                class="mt-1 text-sm text-red-600"
+                *ngIf="
+                  loginForm.get('email')?.touched &&
+                  loginForm.get('email')?.invalid
+                "
+              >
+                Please enter a valid email.
+              </div>
+
+            </div>
+
+
+            <!-- Password -->
+
+            <div class="mb-4">
+
+              <label class="mb-1.5 block text-sm font-medium text-gray-700">
+                Password
+              </label>
+
+              <input
+                type="password"
+                class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                formControlName="password"
+                placeholder="Enter password"
+              >
+
+              <div
+                class="mt-1 text-sm text-red-600"
+                *ngIf="
+                  loginForm.get('password')?.touched &&
+                  loginForm.get('password')?.invalid
+                "
+              >
+                Password must contain at least 6 characters.
+              </div>
+
+            </div>
+
+
+            <!-- Login Button -->
+
+            <button
+              type="submit"
+              class="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-5"
+            >
+              Login
+            </button>
+
+          </form>
+
+
+          <div class="mt-5 text-center text-sm text-gray-600">
+
+            <span>
+              Don't have an account?
+            </span>
+
+            <a
+              routerLink="/register"
+              class="ms-1 font-semibold text-blue-600 hover:text-blue-700 hover:underline"
+            >
+              Register
+            </a>
+
+            <span class="mx-1 text-gray-400">|</span>
+
+            <a
+              routerLink="/"
+              class="font-semibold text-blue-600 hover:text-blue-700 hover:underline"
+            >
+              Home
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div *ngIf="toastMessage" class="login-toast" [class.toast-error]="toastType === 'error'" [class.toast-success]="toastType === 'success'" role="status" aria-live="polite">
+
+  <span class="toast-dot"></span>
+
+  <span class="toast-text">
+    {{ toastMessage }}
+  </span>
+
+  <button type="button" class="toast-close" (click)="closeToast()" aria-label="Dismiss notification">
+    ×
+  </button>
+
+</div>

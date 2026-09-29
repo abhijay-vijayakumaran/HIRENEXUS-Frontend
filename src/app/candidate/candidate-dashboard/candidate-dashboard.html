@@ -1,0 +1,537 @@
+<div class="dashboard">
+
+  <!-- Header Banner -->
+  <div class="dashboard-header relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-800 px-6 py-6 text-white shadow-lg mb-6">
+
+    <div class="absolute inset-0 bg-white/5"></div>
+
+    <svg class="absolute -right-8 -top-8 h-36 w-36 text-white/10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+    </svg>
+
+    <div class="relative z-10 flex items-center gap-4">
+
+      <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white ring-1 ring-white/25">
+
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+        </svg>
+
+      </div>
+
+      <div>
+
+        <h2 class="mb-0 text-2xl font-bold">Candidate Dashboard</h2>
+
+        <p class="mb-0 mt-1 text-sm text-blue-100">
+          Welcome back, {{ username }}
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Error -->
+  <div *ngIf="errorMessage" class="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+    {{ errorMessage }}
+  </div>
+
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center py-5">
+
+    <div class="inline-block h-10 w-10 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" role="status"></div>
+
+    <p class="mt-2">
+      Loading dashboard...
+    </p>
+
+  </div>
+
+
+  <!-- Dashboard Content -->
+  <div *ngIf="!loading">
+
+    <!-- Statistics -->
+    <div class="stats-grid">
+
+      <div class="stat-card rounded-2xl border-gray-200 shadow-sm hover:shadow-lg hover:scale-[1.02]">
+
+        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-500/30">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+
+        </div>
+
+        <div class="stat-content ms-4">
+
+          <span class="stat-title">
+            Available Jobs
+          </span>
+
+          <span class="stat-value text-blue-600">
+            {{ totalJobs }}
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="stat-card rounded-2xl border-gray-200 shadow-sm hover:shadow-lg hover:scale-[1.02]">
+
+        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 text-white shadow-md shadow-sky-500/30">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+
+        </div>
+
+        <div class="stat-content ms-4">
+
+          <span class="stat-title">
+            Applications
+          </span>
+
+          <span class="stat-value text-blue-600">
+            {{ totalApplications }}
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="stat-card rounded-2xl border-gray-200 shadow-sm hover:shadow-lg hover:scale-[1.02]">
+
+        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-md shadow-amber-500/30">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+
+        </div>
+
+        <div class="stat-content ms-4">
+
+          <span class="stat-title">
+            Under Review
+          </span>
+
+          <span class="stat-value text-amber-600">
+            {{ underReview }}
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="stat-card rounded-2xl border-gray-200 shadow-sm hover:shadow-lg hover:scale-[1.02]">
+
+        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 text-white shadow-md shadow-teal-500/30">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+        </div>
+
+        <div class="stat-content ms-4">
+
+          <span class="stat-title">
+            Shortlisted
+          </span>
+
+          <span class="stat-value text-cyan-600">
+            {{ shortlisted }}
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="stat-card rounded-2xl border-gray-200 shadow-sm hover:shadow-lg hover:scale-[1.02]">
+
+        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-blue-700 text-white shadow-md shadow-indigo-500/30">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+
+        </div>
+
+        <div class="stat-content ms-4">
+
+          <span class="stat-title">
+            Interview
+          </span>
+
+          <span class="stat-value text-indigo-600">
+            {{ interview }}
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="stat-card rounded-2xl border-gray-200 shadow-sm hover:shadow-lg hover:scale-[1.02]">
+
+        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-md shadow-green-500/30">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+        </div>
+
+        <div class="stat-content ms-4">
+
+          <span class="stat-title">
+            Selected
+          </span>
+
+          <span class="stat-value text-green-600">
+            {{ selected }}
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="stat-card rounded-2xl border-gray-200 shadow-sm hover:shadow-lg hover:scale-[1.02]">
+
+        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-rose-600 text-white shadow-md shadow-red-500/30">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+
+        </div>
+
+        <div class="stat-content ms-4">
+
+          <span class="stat-title">
+            Rejected
+          </span>
+
+          <span class="stat-value text-red-600">
+            {{ rejected }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Charts -->
+
+    <div class="charts-grid">
+
+      <div class="dashboard-card chart-card rounded-2xl border-gray-200 shadow-sm hover:shadow-lg">
+
+        <div class="card-header flex items-center gap-3">
+
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+
+          </div>
+
+          <div>
+
+            <h2>Application Overview</h2>
+
+            <p>
+              Your application status breakdown
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="chart-container">
+
+          <canvas #applicationChart></canvas>
+
+        </div>
+
+      </div>
+
+      <div class="dashboard-card chart-card rounded-2xl border-gray-200 shadow-sm hover:shadow-lg">
+
+        <div class="card-header flex items-center gap-3">
+
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+
+          </div>
+
+          <div>
+
+            <h2>Interview Overview</h2>
+
+            <p>
+              Your interview status breakdown
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="chart-container">
+
+          <canvas #interviewChart></canvas>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Upcoming Interview -->
+
+    <div class="dashboard-card upcoming-interview rounded-2xl border-gray-200 shadow-sm hover:shadow-lg">
+
+      <div class="card-header flex items-center gap-3">
+
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md">
+
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+
+        </div>
+
+        <div>
+          <h2>Upcoming Interview</h2>
+          <p>Your next scheduled interview</p>
+        </div>
+
+      </div>
+
+      <div *ngIf="upcomingInterview" class="interview-content">
+
+        <div class="interview-job">
+
+          <h3>
+            {{ upcomingInterview.application?.job?.title || 'Interview' }}
+          </h3>
+
+          <p>
+            {{ upcomingInterview.application?.job?.department || '' }}
+          </p>
+
+        </div>
+
+        <div class="interview-details">
+
+          <div class="interview-detail border-blue-200 bg-blue-50/60">
+
+            <span class="detail-label">
+              Date
+            </span>
+
+            <span class="detail-value">
+              {{ formatInterviewDate(upcomingInterview.date) }}
+            </span>
+
+          </div>
+
+          <div class="interview-detail border-blue-200 bg-blue-50/60">
+
+            <span class="detail-label">
+              Time
+            </span>
+
+            <span class="detail-value">
+              {{ upcomingInterview.time }}
+            </span>
+
+          </div>
+
+          <div class="interview-detail border-blue-200 bg-blue-50/60">
+
+            <span class="detail-label">
+              Type
+            </span>
+
+            <span class="detail-value">
+              {{ formatInterviewType(upcomingInterview.type) }}
+            </span>
+
+          </div>
+
+          <div class="interview-detail border-blue-200 bg-blue-50/60">
+
+            <span class="detail-label">
+              Status
+            </span>
+
+            <span class="detail-value">
+              {{ upcomingInterview.status }}
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="interview-actions">
+
+          <a *ngIf="
+          upcomingInterview.type === 'ONLINE' &&
+          upcomingInterview.meetingLink
+        " [href]="upcomingInterview.meetingLink" target="_blank" rel="noopener noreferrer"
+            class="join-interview-button">
+            Join Interview
+          </a>
+
+          <button type="button" class="view-interviews-button" (click)="viewAllInterviews()">
+            View All Interviews
+          </button>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="!upcomingInterview" class="no-interview">
+
+        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+
+        </div>
+
+        <p>
+          No upcoming interviews scheduled.
+        </p>
+
+        <span>
+          Your scheduled interviews will appear here.
+        </span>
+
+      </div>
+
+    </div>
+
+    <!-- Recent Applications -->
+    <div class="recent-section rounded-2xl border-gray-200 shadow-sm">
+
+      <div class="section-header flex items-center gap-3">
+
+        <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+
+        </div>
+
+        <h4 class="text-xl">
+          Recent Applications
+        </h4>
+
+      </div>
+
+      <div *ngIf="applications.length === 0" class="empty-state">
+
+        <p>
+          You haven't applied for any jobs yet.
+        </p>
+
+      </div>
+
+      <div *ngIf="applications.length > 0" class="applications-list">
+
+        <div class="application-item" *ngFor="let application of applications | slice:0:5">
+
+          <div class="flex items-center gap-3">
+
+            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
+
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+
+            </div>
+
+            <div class="application-info">
+
+              <h5>
+                {{ application.job?.title }}
+              </h5>
+
+              <p>
+                {{ application.job?.department }}
+                •
+                {{ application.job?.location }}
+              </p>
+
+            </div>
+
+          </div>
+
+          <span class="status-badge" [ngClass]="{
+              'status-applied':
+                application.status === 'APPLIED',
+
+              'status-review':
+                application.status === 'UNDER_REVIEW',
+
+              'status-shortlisted':
+                application.status === 'SHORTLISTED',
+
+              'status-interview':
+                application.status === 'INTERVIEW',
+
+              'status-selected':
+                application.status === 'SELECTED',
+
+              'status-rejected':
+                application.status === 'REJECTED'
+            }">
+
+            {{ application.status }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Toast -->
+  <div *ngIf="toastMessage" class="fixed right-5 top-5 z-[100] flex w-80 max-w-[90vw] items-start gap-3 rounded-xl p-4 shadow-2xl ring-1"
+    [class.bg-red-50]="toastType === 'error'"
+    [class.ring-red-200]="toastType === 'error'"
+    [class.text-red-800]="toastType === 'error'"
+    [class.bg-green-50]="toastType === 'success'"
+    [class.ring-green-200]="toastType === 'success'"
+    [class.text-green-800]="toastType === 'success'"
+    role="status" aria-live="polite">
+
+    <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full"
+      [class.bg-red-500]="toastType === 'error'"
+      [class.bg-green-500]="toastType === 'success'"></span>
+
+    <span class="flex-1 text-sm font-medium leading-snug">{{ toastMessage }}</span>
+
+    <button type="button" (click)="closeToast()" aria-label="Dismiss notification" class="shrink-0 rounded-md px-1.5 text-lg leading-none transition hover:bg-black/5">×</button>
+
+  </div>
+
+</div>

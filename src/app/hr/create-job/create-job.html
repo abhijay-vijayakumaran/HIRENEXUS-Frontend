@@ -1,0 +1,348 @@
+<!-- <p>create-job works!</p> -->
+<div class="w-full p-6">
+
+  <!-- Header -->
+  <div class="relative mb-6 overflow-hidden rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-purple-800 px-6 py-5 shadow-lg">
+
+    <div class="relative z-10">
+
+      <h2 class="text-2xl font-bold text-white">
+        Create Job
+      </h2>
+
+      <p class="mb-0 mt-1 text-sm text-purple-100">
+        Create a new job opportunity
+      </p>
+
+    </div>
+
+    <svg class="absolute -bottom-8 -right-8 h-44 w-44 text-white/10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+    </svg>
+
+  </div>
+
+
+  <!-- Form Card -->
+  <div class="max-w-[1100px] overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-100">
+
+    <div class="flex items-center gap-3 border-b border-gray-100 bg-gray-50 px-6 py-4">
+
+      <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-100 text-purple-600">
+
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+        </svg>
+
+      </div>
+
+      <div>
+
+        <h3 class="text-base font-bold text-gray-900">
+          Job Details
+        </h3>
+
+        <p class="mb-0 text-xs text-gray-500">
+          Fill in the information below to post a new job
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="p-6">
+
+      <form
+        [formGroup]="jobForm"
+        (ngSubmit)="createJob()"
+      >
+
+        <div class="grid gap-6 md:grid-cols-2">
+
+          <!-- Job Title -->
+          <div>
+
+            <label class="mb-1.5 block text-sm font-medium text-gray-700">
+              Job Title
+            </label>
+
+            <input
+              type="text"
+              class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+              formControlName="title"
+              placeholder="e.g. Full Stack Developer"
+            >
+
+            <small
+              class="mt-1 block text-xs text-red-600"
+              *ngIf="jobForm.get('title')?.touched &&
+                     jobForm.get('title')?.invalid"
+            >
+              Job title is required.
+            </small>
+
+          </div>
+
+
+          <!-- Department -->
+          <div>
+
+            <label class="mb-1.5 block text-sm font-medium text-gray-700">
+              Department
+            </label>
+
+            <input
+              type="text"
+              class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+              formControlName="department"
+              placeholder="e.g. Development"
+            >
+
+          </div>
+
+
+          <!-- Location -->
+          <div>
+
+            <label class="mb-1.5 block text-sm font-medium text-gray-700">
+              Location
+            </label>
+
+            <input
+              type="text"
+              class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+              formControlName="location"
+              placeholder="e.g. Kochi"
+            >
+
+          </div>
+
+
+          <!-- Employment Type -->
+          <div>
+
+            <label class="mb-1.5 block text-sm font-medium text-gray-700">
+              Employment Type
+            </label>
+
+            <select
+              class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+              formControlName="employmentType"
+            >
+
+              <option value="">
+                Select employment type
+              </option>
+
+              <option value="full-time">
+                Full Time
+              </option>
+
+              <option value="part-time">
+                Part Time
+              </option>
+
+              <option value="contract">
+                Contract
+              </option>
+
+              <option value="internship">
+                Internship
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- Salary -->
+          <div>
+
+            <label class="mb-1.5 block text-sm font-medium text-gray-700">
+              Salary
+            </label>
+
+            <input
+              type="number"
+              class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+              formControlName="salary"
+              placeholder="e.g. 35000"
+            >
+
+          </div>
+
+
+          <!-- Experience -->
+          <div>
+
+            <label class="mb-1.5 block text-sm font-medium text-gray-700">
+              Experience
+            </label>
+
+            <input
+              type="text"
+              class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+              formControlName="experience"
+              placeholder="e.g. 0-2 years"
+            >
+
+          </div>
+
+
+          <!-- Skills -->
+          <div>
+
+            <label class="mb-1.5 block text-sm font-medium text-gray-700">
+              Skills
+            </label>
+
+            <input
+              type="text"
+              class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+              formControlName="skills"
+              placeholder="JavaScript, Angular, Node.js, MongoDB"
+            >
+
+            <small class="mt-1 block text-xs text-gray-500">
+              Separate skills using commas.
+            </small>
+
+          </div>
+
+
+          <!-- Deadline -->
+          <div>
+
+            <label class="mb-1.5 block text-sm font-medium text-gray-700">
+              Application Deadline
+            </label>
+
+            <input
+              type="date"
+              class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+              formControlName="deadline"
+            >
+
+          </div>
+
+
+          <!-- Status -->
+          <div>
+
+            <label class="mb-1.5 block text-sm font-medium text-gray-700">
+              Job Status
+            </label>
+
+            <select
+              class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+              formControlName="status"
+            >
+
+              <option value="DRAFT">
+                Draft
+              </option>
+
+              <option value="OPEN">
+                Open
+              </option>
+
+              <option value="PAUSED">
+                Paused
+              </option>
+
+              <option value="CLOSED">
+                Closed
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- Description -->
+          <div>
+
+            <label class="mb-1.5 block text-sm font-medium text-gray-700">
+              Job Description
+            </label>
+
+            <textarea
+              class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+              rows="6"
+              formControlName="description"
+              placeholder="Enter detailed job description..."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+
+        <!-- Buttons -->
+        <div class="mt-6 flex justify-end gap-3 border-t border-gray-100 pt-5">
+
+          <button
+            type="button"
+            class="inline-flex items-center gap-2 rounded-lg bg-gray-200 px-5 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-300"
+            (click)="cancel()"
+          >
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
+            </svg>
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-5 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-purple-700"
+            [disabled]="loading"
+          >
+
+            <span
+              *ngIf="loading"
+              class="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"
+            ></span>
+
+            <svg *ngIf="!loading" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+
+            {{ loading ? 'Creating...' : 'Create Job' }}
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Toast -->
+<div *ngIf="toastMessage"
+  class="fixed right-5 top-5 z-[100] flex w-80 max-w-[90vw] items-start gap-3 rounded-xl p-4 shadow-2xl ring-1"
+  [class.bg-red-50]="toastType === 'error'"
+  [class.ring-red-200]="toastType === 'error'"
+  [class.text-red-800]="toastType === 'error'"
+  [class.bg-green-50]="toastType === 'success'"
+  [class.ring-green-200]="toastType === 'success'"
+  [class.text-green-800]="toastType === 'success'"
+  role="status" aria-live="polite">
+
+  <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full"
+    [class.bg-red-500]="toastType === 'error'"
+    [class.bg-green-500]="toastType === 'success'"></span>
+
+  <span class="flex-1 text-sm font-medium leading-snug">
+    {{ toastMessage }}
+  </span>
+
+  <button type="button" (click)="closeToast()" aria-label="Dismiss notification"
+    class="shrink-0 rounded-md px-1.5 text-lg leading-none transition hover:bg-black/5">
+    ×
+  </button>
+
+</div>

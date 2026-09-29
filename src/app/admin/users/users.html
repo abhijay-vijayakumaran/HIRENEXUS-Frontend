@@ -1,0 +1,256 @@
+<div class="w-full p-6">
+
+    <div class="relative mb-6 overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-green-600 to-teal-800 p-6 text-white shadow-lg">
+
+        <div class="absolute inset-0 bg-white/5"></div>
+
+        <svg class="absolute -bottom-6 -right-6 h-32 w-32 text-white/10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0" />
+        </svg>
+
+        <div class="relative z-10 flex items-center justify-between gap-4">
+
+            <div class="flex items-center gap-4">
+
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white ring-1 ring-white/25">
+
+                    <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+
+                </div>
+
+                <div>
+
+                    <h2 class="mb-0 text-2xl font-bold leading-tight">
+                        User Management
+                    </h2>
+
+                    <p class="mb-0 mt-1 text-sm text-green-100">
+                        Manage platform users
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="flex w-full max-w-md flex-col items-stretch gap-3">
+
+                <span class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-sm font-semibold text-white ring-1 ring-white/25">
+
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0" />
+                    </svg>
+
+                    {{ users.length }} Users
+                </span>
+
+                <div class="search-section relative w-full">
+
+                    <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-green-100">
+
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+
+                    </span>
+
+                    <input
+                        type="text"
+                        class="w-full rounded-lg border border-white/30 bg-white/15 py-2 pl-10 pr-3 text-sm text-white outline-none backdrop-blur transition placeholder:text-green-100 focus:border-white focus:bg-white/25"
+                        placeholder="Search by username, email or role..."
+                        [(ngModel)]="searchTerm"
+                        (input)="searchUsers()"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-100">
+
+        <div class="overflow-x-auto">
+
+                <table class="mb-0 w-full border-collapse text-sm">
+
+                    <thead class="bg-gradient-to-r from-emerald-800 to-green-800 text-left text-gray-100">
+
+                        <tr>
+
+                            <th class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">#</th>
+
+                            <th class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">Username</th>
+
+                            <th class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">Email</th>
+
+                            <th class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">Role</th>
+
+                            <th class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">Status</th>
+                            <!-- 
+                            <th>Created</th> -->
+
+                            <th class="px-5 py-3 text-xs font-semibold uppercase tracking-wider">Action</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody class="divide-y divide-gray-100">
+
+                        <tr *ngIf="loading">
+
+                            <td colspan="6" class="px-5 py-10 text-center">
+
+                                <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-green-600 border-t-transparent"></div>
+
+                            </td>
+
+                        </tr>
+
+                        <tr *ngFor="let user of filteredUsers; let i = index" class="transition hover:bg-green-50">
+
+                            <td class="px-5 py-3">
+                                {{ i + 1 }}
+                            </td>
+
+                            <td class="px-5 py-3 font-medium text-gray-800">
+                                {{ user.username }}
+                            </td>
+
+                            <td class="px-5 py-3 text-gray-500">
+                                {{ user.email }}
+                            </td>
+                            <td class="px-5 py-3">
+
+                                <select class="w-full rounded-lg border border-gray-300 bg-white px-2 py-1.5 text-xs text-gray-900 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200" [value]="user.role"
+                                    (change)="updateRole(user, $event)">
+
+                                    <option value="candidate">
+                                        Candidate
+                                    </option>
+
+                                    <option value="hr">
+                                        HR
+                                    </option>
+
+                                    <option value="admin">
+                                        Admin
+                                    </option>
+
+                                </select>
+
+                            </td>
+
+                            <td class="px-5 py-3">
+
+                                <span class="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold" [ngClass]="
+                    user.status === 'active'
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-red-100 text-red-700'
+                  ">
+
+                                    <span class="h-1.5 w-1.5 rounded-full" [ngClass]="user.status === 'active' ? 'bg-green-500' : 'bg-red-500'"></span>
+
+                                    {{ user.status }}
+                                </span>
+
+                            </td>
+
+                            <!-- <td>
+                                {{ user.createdAt | date:'mediumDate' }}
+                            </td> -->
+
+                            <td class="px-5 py-3">
+
+                                <button type="button" class="rounded-md px-3 py-1.5 text-xs font-semibold transition"
+                                    [ngClass]="user.status === 'active'  ? 'bg-red-500 text-white hover:bg-red-600'  : 'bg-green-600 text-white hover:bg-green-700 hover:shadow-lg'"
+                                    (click)="updateStatus(user)">
+
+                                    {{ user.status === 'active' ? 'Deactivate' : 'Activate' }}
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr *ngIf="!loading && users.length === 0">
+
+                            <td colspan="6" class="px-5 py-8 text-center text-gray-500">
+                                No users found.
+                            </td>
+
+                        </tr>
+
+                        <tr *ngIf="!loading && users.length > 0 && filteredUsers.length === 0">
+
+                            <td colspan="6" class="px-5 py-8 text-center text-gray-500">
+                                No users match your search.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- ========================= -->
+        <!-- TOAST -->
+        <!-- ========================= -->
+
+        @if (toastVisible) {
+
+            <div class="fixed right-5 top-5 z-[100] flex w-[350px] max-w-[90vw] items-start gap-3 rounded-xl border p-4 shadow-lg"
+
+                [ngClass]="toastType === 'success' ? 'bg-green-50 ring-1 ring-green-200' : 'bg-red-50 ring-1 ring-red-200'"
+
+                role="status" aria-live="polite">
+
+                <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+
+                    [ngClass]="toastType === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'">
+
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            [attr.d]="toastType === 'success' ? 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' : 'M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'" />
+                    </svg>
+
+                </span>
+
+                <p class="m-0 flex-1 text-sm font-medium"
+
+                    [ngClass]="toastType === 'success' ? 'text-green-800' : 'text-red-800'">
+
+                    {{ toastMessage }}
+
+                </p>
+
+                <button type="button"
+
+                    class="shrink-0 text-gray-400 transition hover:text-gray-600"
+
+                    (click)="closeToast()"
+
+                    aria-label="Close notification">
+
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+
+                </button>
+
+            </div>
+
+        }
+
+    </div>

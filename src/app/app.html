@@ -1,0 +1,4 @@
+
+<div [@routeAnimation]="outlet.isActivated ? outlet.activatedRoute.snapshot.url.join('/') : ''">
+  <router-outlet #outlet="outlet" />
+</div>

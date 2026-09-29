@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { CandidateLayout } from './candidate-layout';
+
+describe('CandidateLayout', () => {
+  let component: CandidateLayout;
+  let fixture: ComponentFixture<CandidateLayout>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [CandidateLayout]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(CandidateLayout);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

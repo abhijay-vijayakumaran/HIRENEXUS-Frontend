@@ -1,0 +1,383 @@
+.jobs-page {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
+
+.page-header h2 {
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+
+.page-header p {
+  margin: 0;
+  color: #ffffff;
+}
+
+
+.loading-state {
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #6c757d;
+}
+
+
+.loading-state .spinner-border {
+  margin-bottom: 15px;
+}
+
+
+.empty-state {
+  min-height: 300px;
+
+  background: #ffffff;
+
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 40px;
+}
+
+
+.empty-state h4 {
+  margin-bottom: 8px;
+}
+
+
+.empty-state p {
+  color: #6c757d;
+  margin: 0;
+}
+
+
+.jobs-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+
+.job-card {
+  background: #ffffff;
+
+  border: 1px solid #dee2e6;
+
+  border-radius: 12px;
+
+  padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+
+  transition: 0.2s;
+}
+
+
+.job-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+.job-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 15px;
+
+  margin-bottom: 15px;
+}
+
+
+.job-header h4 {
+  margin: 0 0 5px;
+
+  font-weight: 700;
+}
+
+
+.department {
+  color: #6c757d;
+
+  font-size: 14px;
+}
+
+
+.status-badge {
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  background: #d1e7dd;
+
+  color: #0f5132;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+
+.job-description {
+  color: #495057;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+
+  margin-bottom: 20px;
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 3;
+
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+
+.job-info {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 15px;
+
+  padding: 18px 0;
+
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+
+  margin-bottom: 18px;
+}
+
+
+.info-item {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+.info-item strong {
+  font-size: 12px;
+
+  color: #6c757d;
+
+  font-weight: 600;
+}
+
+
+.info-item span {
+  font-size: 14px;
+
+  color: #212529;
+}
+
+
+.skills-section {
+  margin-bottom: 22px;
+}
+
+
+.skills-section > strong {
+  display: block;
+
+  font-size: 13px;
+
+  margin-bottom: 10px;
+}
+
+
+.skills {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+
+.skill {
+  padding: 5px 9px;
+
+  background: #dbeafe;
+
+  border-radius: 6px;
+
+  font-size: 12px;
+
+  color: #1e40af;
+}
+
+
+.job-footer {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-top: auto;
+}
+
+
+.deadline {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+.deadline strong {
+  font-size: 12px;
+
+  color: #6c757d;
+}
+
+
+.deadline span {
+  font-size: 13px;
+}
+
+
+@media (max-width: 900px) {
+
+  .jobs-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .page-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 15px;
+  }
+
+
+  .job-info {
+    grid-template-columns: 1fr;
+  }
+
+
+  .job-footer {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+}
+
+
+/* filter card */
+
+.filters-card {
+  margin-bottom: 24px;
+
+  padding: 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #dee2e6;
+
+  border-radius: 12px;
+}
+
+
+.search-box {
+  margin-bottom: 16px;
+}
+
+
+.search-box label,
+.filter-item label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  color: #495057;
+}
+
+
+.filter-row {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 16px;
+
+  align-items: end;
+}
+
+
+.results-info {
+  margin-bottom: 20px;
+
+  font-size: 14px;
+
+  color: #6c757d;
+
+  text-align: right;
+}
+
+
+.results-info strong {
+  color: #212529;
+}
+
+
+@media (max-width: 900px) {
+
+  .filter-row {
+    grid-template-columns: 1fr;
+  }
+
+}

@@ -1,0 +1,732 @@
+<!-- <p>hr-dashboard works!</p> -->
+<div class="w-full p-6">
+
+<!-- Header -->
+<div class="relative mb-6 overflow-hidden rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-purple-800 p-6 shadow-lg">
+
+  <div class="relative z-10 flex items-center justify-between">
+
+    <div>
+
+      <h2 class="text-2xl font-bold text-white">
+        HR Dashboard
+      </h2>
+
+      <p class="mb-0 mt-1 text-sm text-purple-100">
+        Manage your jobs and recruitment activities in one place
+      </p>
+
+    </div>
+
+    <button
+      class="inline-flex items-center gap-2 rounded-lg border border-white/30 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20"
+      (click)="refreshDashboard()"
+    >
+      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+      </svg>
+      Refresh Dashboard
+    </button>
+
+  </div>
+
+  <svg class="absolute -bottom-10 -right-10 h-52 w-52 text-white/10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+  </svg>
+
+</div>
+
+
+  <!-- Job Statistics -->
+  <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+
+    <!-- Total Jobs -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Total Jobs
+        </h6>
+
+        <h2 class="text-3xl font-bold text-gray-900">
+          {{ totalJobs }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Open Jobs -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Open Jobs
+        </h6>
+
+        <h2 class="text-3xl font-bold text-emerald-600">
+          {{ openJobs }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Draft Jobs -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Draft Jobs
+        </h6>
+
+        <h2 class="text-3xl font-bold text-amber-600">
+          {{ draftJobs }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Closed Jobs -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-rose-500 to-red-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Closed Jobs
+        </h6>
+
+        <h2 class="text-3xl font-bold text-rose-600">
+          {{ closedJobs }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Paused Jobs -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-slate-500 to-gray-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Paused Jobs
+        </h6>
+
+        <h2 class="text-3xl font-bold text-gray-500">
+          {{ pausedJobs }}
+        </h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+<!-- Application Statistics -->
+
+<div class="mt-10">
+
+  <div class="mb-4 flex items-center gap-3">
+
+    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-100 text-purple-600">
+
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+
+    </div>
+
+    <h4 class="text-lg font-bold text-gray-900">
+      Application Statistics
+    </h4>
+
+  </div>
+
+  <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+
+    <!-- Total Applicants -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Total Applicants
+        </h6>
+
+        <h2 class="text-3xl font-bold text-gray-900">
+          {{ totalApplicants }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Applied -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-500 to-purple-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Applied
+        </h6>
+
+        <h2 class="text-3xl font-bold text-purple-600">
+          {{ appliedApplicants }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Under Review -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Under Review
+        </h6>
+
+        <h2 class="text-3xl font-bold text-amber-600">
+          {{ underReviewApplicants }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Shortlisted -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-teal-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Shortlisted
+        </h6>
+
+        <h2 class="text-3xl font-bold text-cyan-600">
+          {{ shortlistedApplicants }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Interview -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Interview
+        </h6>
+
+        <h2 class="text-3xl font-bold text-violet-600">
+          {{ interviewApplicants }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Selected -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Selected
+        </h6>
+
+        <h2 class="text-3xl font-bold text-emerald-600">
+          {{ selectedApplicants }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Rejected -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-rose-500 to-red-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Rejected
+        </h6>
+
+        <h2 class="text-3xl font-bold text-rose-600">
+          {{ rejectedApplicants }}
+        </h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Application Status Chart -->
+
+<div class="mt-10">
+
+  <div class="mb-4 flex items-center gap-3">
+
+    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-100 text-purple-600">
+
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+
+    </div>
+
+    <h4 class="text-lg font-bold text-gray-900">
+      Application Overview
+    </h4>
+
+  </div>
+
+  <div class="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100">
+
+    <div style="height: 350px;">
+
+      <canvas #applicationChart></canvas>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+<!-- Interview Statistics -->
+
+<div class="mt-10">
+
+  <div class="mb-4 flex items-center gap-3">
+
+    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-100 text-purple-600">
+
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+      </svg>
+
+    </div>
+
+    <h4 class="text-lg font-bold text-gray-900">
+      Interview Statistics
+    </h4>
+
+  </div>
+
+  <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+
+    <!-- Total Interviews -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Total Interviews
+        </h6>
+
+        <h2 class="text-3xl font-bold text-gray-900">
+          {{ totalInterviews }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Scheduled -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-500 to-purple-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Scheduled
+        </h6>
+
+        <h2 class="text-3xl font-bold text-purple-600">
+          {{ scheduledInterviews }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Completed -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Completed
+        </h6>
+
+        <h2 class="text-3xl font-bold text-emerald-600">
+          {{ completedInterviews }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Cancelled -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-rose-500 to-red-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Cancelled
+        </h6>
+
+        <h2 class="text-3xl font-bold text-rose-600">
+          {{ cancelledInterviews }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- Rescheduled -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Rescheduled
+        </h6>
+
+        <h2 class="text-3xl font-bold text-amber-600">
+          {{ rescheduledInterviews }}
+        </h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Interview Status Chart -->
+
+<div class="mt-10">
+
+  <div class="mb-4 flex items-center gap-3">
+
+    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-100 text-purple-600">
+
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+      </svg>
+
+    </div>
+
+    <h4 class="text-lg font-bold text-gray-900">
+      Interview Overview
+    </h4>
+
+  </div>
+
+  <div class="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100">
+
+    <div style="height: 350px;">
+
+      <canvas #interviewChart></canvas>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- Recruitment Summary -->
+
+<div class="mt-10 mb-6">
+
+  <div class="mb-4 flex items-center gap-3">
+
+    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-100 text-purple-600">
+
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+      </svg>
+
+    </div>
+
+    <h4 class="text-lg font-bold text-gray-900">
+      Recruitment Summary
+    </h4>
+
+  </div>
+
+  <div class="grid gap-5 md:grid-cols-3">
+
+    <!-- Active Jobs -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Active Jobs
+        </h6>
+
+        <h2 class="text-3xl font-bold text-emerald-600">
+          {{ openJobs + pausedJobs }}
+        </h2>
+
+        <small class="mt-1 block text-xs text-gray-500">
+          Open and paused job positions
+        </small>
+
+      </div>
+
+    </div>
+
+    <!-- Pending Applications -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Pending Applications
+        </h6>
+
+        <h2 class="text-3xl font-bold text-amber-600">
+          {{ appliedApplicants + underReviewApplicants }}
+        </h2>
+
+        <small class="mt-1 block text-xs text-gray-500">
+          Applications awaiting further processing
+        </small>
+
+      </div>
+
+    </div>
+
+    <!-- Upcoming Interviews -->
+    <div>
+
+      <div class="h-full rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:shadow-lg">
+
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-500 to-purple-600 text-white shadow-md">
+
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+
+        </div>
+
+        <h6 class="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Upcoming Interviews
+        </h6>
+
+        <h2 class="text-3xl font-bold text-purple-600">
+          {{ scheduledInterviews }}
+        </h2>
+
+        <small class="mt-1 block text-xs text-gray-500">
+          Currently scheduled interviews
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Toast -->
+<div *ngIf="toastMessage"
+  class="fixed right-5 top-5 z-[100] flex w-80 max-w-[90vw] items-start gap-3 rounded-xl p-4 shadow-2xl ring-1"
+  [class.bg-red-50]="toastType === 'error'"
+  [class.ring-red-200]="toastType === 'error'"
+  [class.text-red-800]="toastType === 'error'"
+  [class.bg-green-50]="toastType === 'success'"
+  [class.ring-green-200]="toastType === 'success'"
+  [class.text-green-800]="toastType === 'success'"
+  role="status" aria-live="polite">
+
+  <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full"
+    [class.bg-red-500]="toastType === 'error'"
+    [class.bg-green-500]="toastType === 'success'"></span>
+
+  <span class="flex-1 text-sm font-medium leading-snug">
+    {{ toastMessage }}
+  </span>
+
+  <button type="button" (click)="closeToast()" aria-label="Dismiss notification"
+    class="shrink-0 rounded-md px-1.5 text-lg leading-none transition hover:bg-black/5">
+    ×
+  </button>
+
+</div>

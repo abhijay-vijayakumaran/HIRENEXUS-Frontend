@@ -1,0 +1,273 @@
+<div class="settings-page">
+
+    <div class="page-header rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-800 px-6 py-6 text-white shadow-lg">
+
+        <div class="flex items-center gap-4">
+
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white ring-1 ring-white/25">
+
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+
+            </div>
+
+            <div>
+
+                <h2 class="mb-0 text-2xl font-bold">Settings</h2>
+
+                <p class="mb-0 mt-1 text-sm text-blue-100">
+                    Manage your account settings.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Loading -->
+
+    <div *ngIf="loading" class="loading-state">
+
+        <div class="inline-block h-10 w-10 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" role="status"></div>
+
+        <p class="mt-3">Loading settings...</p>
+
+    </div>
+
+
+    <!-- Error -->
+
+    <div *ngIf="!loading && errorMessage" class="error-state">
+
+        <p>{{ errorMessage }}</p>
+
+    </div>
+
+
+    <!-- Settings -->
+
+    <div *ngIf="
+      !loading &&
+      !errorMessage &&
+      profile
+    " class="settings-container">
+
+        <!-- Account Information -->
+
+        <div class="settings-card rounded-2xl border-gray-200 shadow-sm">
+
+            <div class="card-header flex items-center gap-3">
+
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+
+                </div>
+
+                <div>
+
+                    <h3>Account Information</h3>
+
+                    <p>
+                        Your basic account details.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings-grid">
+
+                <div class="setting-item">
+
+                    <span>Username</span>
+
+                    <strong class="inline-flex items-center gap-1.5 text-blue-700">
+
+                        <svg class="h-4 w-4 shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+
+                        {{ profile.username }}
+                    </strong>
+
+                </div>
+
+
+                <div class="setting-item">
+
+                    <span>Email</span>
+
+                    <strong class="inline-flex items-center gap-1.5 text-blue-700">
+
+                        <svg class="h-4 w-4 shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+
+                        {{ profile.email }}
+                    </strong>
+
+                </div>
+
+
+                <div class="setting-item">
+
+                    <span>Role</span>
+
+                    <strong class="inline-flex items-center gap-1.5 text-blue-700">
+
+                        <svg class="h-4 w-4 shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+
+                        {{ profile.role | titlecase }}
+                    </strong>
+
+                </div>
+
+
+                <div class="setting-item">
+
+                    <span>Account Status</span>
+
+                    <strong class="status-badge" [ngClass]="profile.status">
+                        {{ profile.status | titlecase }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Profile Settings -->
+
+        <div class="settings-card rounded-2xl border-gray-200 shadow-sm">
+
+            <div class="card-header flex items-center gap-3">
+
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+
+                </div>
+
+                <div>
+
+                    <h3>Profile Settings</h3>
+
+                    <p>
+                        Update your personal and professional information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="setting-action">
+
+                <div>
+
+                    <strong>
+                        Candidate Profile
+                    </strong>
+
+                    <p>
+                        Manage your phone, location, education,
+                        skills, experience and bio.
+                    </p>
+
+                </div>
+
+                <a routerLink="/candidate/profile" class="action-button">
+                    Manage Profile
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Account Actions -->
+
+        <div class="settings-card rounded-2xl border-gray-200 shadow-sm">
+
+            <div class="card-header flex items-center gap-3">
+
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+
+                </div>
+
+                <div>
+
+                    <h3>Account Actions</h3>
+
+                    <p>
+                        Manage your current account session.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="setting-action">
+
+                <div>
+
+                    <strong>
+                        Logout
+                    </strong>
+
+                    <p>
+                        Sign out of your Candidate account.
+                    </p>
+
+                </div>
+
+                <button type="button" class="logout-button" (click)="logout()">
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+    <div *ngIf="toastMessage" class="fixed right-5 top-5 z-[100] flex w-80 max-w-[90vw] items-start gap-3 rounded-xl p-4 shadow-2xl ring-1"
+        [class.bg-red-50]="toastType === 'error'"
+        [class.ring-red-200]="toastType === 'error'"
+        [class.text-red-800]="toastType === 'error'"
+        [class.bg-green-50]="toastType === 'success'"
+        [class.ring-green-200]="toastType === 'success'"
+        [class.text-green-800]="toastType === 'success'"
+        role="status" aria-live="polite">
+
+        <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full"
+            [class.bg-red-500]="toastType === 'error'"
+            [class.bg-green-500]="toastType === 'success'"></span>
+
+        <span class="flex-1 text-sm font-medium leading-snug">{{ toastMessage }}</span>
+
+        <button type="button" (click)="closeToast()" aria-label="Dismiss notification" class="shrink-0 rounded-md px-1.5 text-lg leading-none transition hover:bg-black/5">×</button>
+
+    </div>
+
+</div>

@@ -1,0 +1,580 @@
+<div class="profile-page">
+
+  <div class="page-header rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-800 px-6 py-6 text-white shadow-lg">
+
+    <div class="flex items-center gap-4">
+
+      <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white ring-1 ring-white/25">
+
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+
+      </div>
+
+      <div>
+
+        <h2 class="mb-0 text-2xl font-bold">My Profile</h2>
+
+        <p class="mb-0 mt-1 text-sm text-blue-100">
+          Manage your personal and professional information.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Loading -->
+
+  <div
+    *ngIf="loading"
+    class="loading-state"
+  >
+
+    <div class="inline-block h-10 w-10 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" role="status"></div>
+
+    <p class="mt-3">Loading profile...</p>
+
+  </div>
+
+
+  <!-- Error -->
+
+  <div
+    *ngIf="!loading && errorMessage"
+    class="error-state"
+  >
+
+    <p>{{ errorMessage }}</p>
+
+  </div>
+
+
+  <!-- Profile -->
+
+  <div
+    *ngIf="
+      !loading &&
+      !errorMessage &&
+      profile
+    "
+    class="profile-card rounded-2xl border-gray-200 shadow-sm"
+  >
+
+
+
+    <!-- ========================= -->
+    <!-- VIEW MODE -->
+    <!-- ========================= -->
+
+    <div *ngIf="!editMode">
+
+      <!-- Profile Header -->
+
+      <div class="profile-header">
+
+        <div class="profile-avatar bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/30">
+
+          {{ profile.username?.charAt(0)?.toUpperCase() }}
+
+        </div>
+
+        <div>
+
+          <h3>
+            {{ profile.username }}
+          </h3>
+
+          <p>
+            {{ profile.email }}
+          </p>
+
+          <span class="role-badge">
+            Candidate
+          </span>
+
+        </div>
+
+        <button
+          type="button"
+          class="edit-button"
+          (click)="openEditMode()"
+        >
+
+          Edit Profile
+
+        </button>
+
+      </div>
+
+ <div class="completion-section">
+
+  <div class="completion-header">
+
+    <strong>
+      Profile Completion
+    </strong>
+
+    <span>
+      {{ getProfileCompletion() }}%
+    </span>
+
+  </div>
+
+  <div class="completion-bar">
+
+    <div
+      class="completion-progress"
+      [style.width.%]="getProfileCompletion()"
+    ></div>
+
+  </div>
+
+  <p>
+    Complete your profile to help employers learn more about you.
+  </p>
+
+</div>
+
+      <!-- Success Message -->
+
+      <div
+        *ngIf="successMessage"
+        class="success-message"
+      >
+
+        {{ successMessage }}
+
+      </div>
+
+
+      <!-- Account Information -->
+
+      <div class="profile-section">
+
+        <h4 class="inline-flex items-center gap-2 text-blue-800">
+
+          <svg class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+
+          Account Information
+        </h4>
+
+        <div class="profile-grid">
+
+          <div class="profile-item">
+
+            <span>Email</span>
+
+            <strong class="inline-flex items-center gap-1.5 text-blue-700">
+
+              <svg class="h-4 w-4 shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+
+              {{ profile.email }}
+            </strong>
+
+          </div>
+
+
+          <div class="profile-item">
+
+            <span>Account Status</span>
+
+            <strong class="text-green-700">
+              {{ profile.status | titlecase }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Personal Information -->
+
+      <div class="profile-section">
+
+        <h4 class="inline-flex items-center gap-2 text-blue-800">
+
+          <svg class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+
+          Personal Information
+        </h4>
+
+        <div class="profile-grid">
+
+          <div class="profile-item">
+
+            <span>Phone</span>
+
+            <strong class="inline-flex items-center gap-1.5 text-blue-700">
+
+              <svg class="h-4 w-4 shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h.5a2 2 0 011.106.323l2.646 1.764a2 2 0 01.6 2.657l-.766 1.277a.5.5 0 00.014.61c.785.948 1.95 2.112 2.9 2.9a.5.5 0 00.61.014l1.277-.766a2 2 0 012.657.6l1.764 2.646A2 2 0 0117 16.5v.5a2 2 0 01-2 2H14a11 11 0 01-11-11V5z" />
+              </svg>
+
+              {{ profile.phone || 'Not added' }}
+            </strong>
+
+          </div>
+
+
+          <div class="profile-item">
+
+            <span>Location</span>
+
+            <strong class="inline-flex items-center gap-1.5 text-blue-700">
+
+              <svg class="h-4 w-4 shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+
+              {{ profile.location || 'Not added' }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Professional Information -->
+
+      <div class="profile-section">
+
+        <h4 class="inline-flex items-center gap-2 text-blue-800">
+
+          <svg class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+
+          Professional Information
+        </h4>
+
+
+        <div class="profile-item">
+
+          <span>Education</span>
+
+          <strong class="inline-flex items-center gap-1.5 text-blue-700">
+
+            <svg class="h-4 w-4 shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+            </svg>
+
+            {{ profile.education || 'Not added' }}
+          </strong>
+
+        </div>
+
+
+        <div class="profile-item">
+
+          <span>Experience</span>
+
+          <strong class="inline-flex items-center gap-1.5 text-blue-700">
+
+            <svg class="h-4 w-4 shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+
+            {{ profile.experience || 'Not added' }}
+          </strong>
+
+        </div>
+
+
+        <div class="profile-item">
+
+          <span>Skills</span>
+
+          <div
+            *ngIf="
+              profile.skills &&
+              profile.skills.length > 0
+            "
+            class="skills-list"
+          >
+
+            <span
+              *ngFor="let skill of profile.skills"
+              class="skill-badge"
+            >
+
+              {{ skill }}
+
+            </span>
+
+          </div>
+
+          <strong
+            *ngIf="
+              !profile.skills ||
+              profile.skills.length === 0
+            "
+          >
+            Not added
+          </strong>
+
+        </div>
+
+
+        <div class="profile-item">
+
+          <span>Bio</span>
+
+          <p>
+            {{ profile.bio || 'Not added' }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- Edit Button -->
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- EDIT MODE -->
+    <!-- ========================= -->
+
+    <div *ngIf="editMode">
+
+      <div class="edit-header">
+
+        <h3>
+          Edit Profile
+        </h3>
+
+        <p>
+          Update your personal and professional information.
+        </p>
+
+      </div>
+
+
+      <!-- Error -->
+
+      <div
+        *ngIf="saveError"
+        class="save-error"
+      >
+
+        {{ saveError }}
+
+      </div>
+
+
+      <!-- Username -->
+
+      <div class="form-group">
+
+        <label>
+          Username
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="editData.username"
+          placeholder="Enter your username"
+        />
+
+      </div>
+
+
+      <!-- Email -->
+
+      <div class="form-group">
+
+        <label>
+          Email
+        </label>
+
+        <input
+          type="email"
+          [value]="profile.email"
+          disabled
+        />
+
+        <small>
+          Email cannot be changed here.
+        </small>
+
+      </div>
+
+
+      <!-- Phone -->
+
+      <div class="form-group">
+
+        <label>
+          Phone
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="editData.phone"
+          placeholder="Enter your phone number"
+        />
+
+      </div>
+
+
+      <!-- Location -->
+
+      <div class="form-group">
+
+        <label>
+          Location
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="editData.location"
+          placeholder="Enter your location"
+        />
+
+      </div>
+
+
+      <!-- Education -->
+
+      <div class="form-group">
+
+        <label>
+          Education
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="editData.education"
+          placeholder="Example: MCA"
+        />
+
+      </div>
+
+
+      <!-- Skills -->
+
+      <div class="form-group">
+
+        <label>
+          Skills
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="editData.skills"
+          placeholder="Angular, React, Node.js, MongoDB"
+        />
+
+        <small>
+          Separate multiple skills using commas.
+        </small>
+
+      </div>
+
+
+      <!-- Experience -->
+
+      <div class="form-group">
+
+        <label>
+          Experience
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="editData.experience"
+          placeholder="Enter your experience"
+        />
+
+      </div>
+
+
+      <!-- Bio -->
+
+      <div class="form-group">
+
+        <label>
+          Bio
+        </label>
+
+        <textarea
+          rows="5"
+          [(ngModel)]="editData.bio"
+          placeholder="Write a short professional bio"
+        ></textarea>
+
+      </div>
+
+
+      <!-- Actions -->
+
+      <div class="edit-actions">
+
+        <button
+          type="button"
+          class="cancel-button"
+          (click)="cancelEdit()"
+          [disabled]="saving"
+        >
+
+          Cancel
+
+        </button>
+
+
+        <button
+          type="button"
+          class="save-button"
+          (click)="saveProfile()"
+          [disabled]="saving"
+        >
+
+          {{ saving ? 'Saving...' : 'Save Changes' }}
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Toast -->
+  <div *ngIf="toastMessage" class="fixed right-5 top-5 z-[100] flex w-80 max-w-[90vw] items-start gap-3 rounded-xl p-4 shadow-2xl ring-1"
+    [class.bg-red-50]="toastType === 'error'"
+    [class.ring-red-200]="toastType === 'error'"
+    [class.text-red-800]="toastType === 'error'"
+    [class.bg-green-50]="toastType === 'success'"
+    [class.ring-green-200]="toastType === 'success'"
+    [class.text-green-800]="toastType === 'success'"
+    role="status" aria-live="polite">
+
+    <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full"
+      [class.bg-red-500]="toastType === 'error'"
+      [class.bg-green-500]="toastType === 'success'"></span>
+
+    <span class="flex-1 text-sm font-medium leading-snug">{{ toastMessage }}</span>
+
+    <button type="button" (click)="closeToast()" aria-label="Dismiss notification" class="shrink-0 rounded-md px-1.5 text-lg leading-none transition hover:bg-black/5">×</button>
+
+  </div>
+
+</div>

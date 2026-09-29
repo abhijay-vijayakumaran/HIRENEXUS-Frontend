@@ -1,0 +1,101 @@
+.applicant-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.applicant-card:hover {
+  transform: translateY(-4px);
+}
+
+.applicant-card p {
+  word-break: break-word;
+}
+
+.status-badge {
+  display: inline-flex;
+  border-radius: 9999px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-applied {
+  background: #7c3aed;
+  color: #ffffff;
+}
+
+.status-review {
+  background: #facc15;
+  color: #1f2937;
+}
+
+.status-shortlisted {
+  background: #22d3ee;
+  color: #1f2937;
+}
+
+.status-interview {
+  background: #6b7280;
+  color: #ffffff;
+}
+
+.status-selected {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.status-rejected {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.status-withdrawn {
+  background: #374151;
+  color: #ffffff;
+}
+
+.accent-applied {
+  background: #7c3aed;
+}
+
+.accent-review {
+  background: #facc15;
+}
+
+.accent-shortlisted {
+  background: #22d3ee;
+}
+
+.accent-interview {
+  background: #6b7280;
+}
+
+.accent-selected {
+  background: #16a34a;
+}
+
+.accent-rejected {
+  background: #dc2626;
+}
+
+.accent-withdrawn {
+  background: #374151;
+}
+
+.cover-letter-body {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.cover-letter-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cover-letter-body::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 9999px;
+}
+
+.cover-letter-body::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}

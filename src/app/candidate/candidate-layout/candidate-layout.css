@@ -1,0 +1,12 @@
+.candidate-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.candidate-content {
+  flex: 1;
+  min-width: 0;
+  padding: 30px;
+  overflow-x: hidden;
+}
